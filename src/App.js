@@ -7,10 +7,10 @@ class App {
 
     while (true) {
       const userInput = await Console.readLineAsync('숫자를 입력해주세요 :');
-      this.checkUserInput(userInput);
+      this.validateAndThrowError(userInput);
       const { strike, ball } = this.calculateGameResult(answer, userInput);
 
-      Console.print(this.printGameResult(strike, ball));
+      Console.print(this.generateResultMessage(strike, ball));
 
       if (strike === 3) {
         Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
@@ -36,7 +36,7 @@ class App {
     return computer;
   }
 
-  checkUserInput(userInput) {
+  validateAndThrowError(userInput) {
     if (userInput.length > 3) {
       throw Error('[ERROR] 3자리의 수를 입력해주세요');
     }
@@ -63,7 +63,7 @@ class App {
     return { strike, ball };
   }
 
-  printGameResult(strike, ball) {
+  generateResultMessage(strike, ball) {
     let resultStr = '';
 
     if (strike === 0 && ball === 0) {
